@@ -1,0 +1,22 @@
+schema-version: 1.0
+
+type: builder
+
+
+const:
+  srcDir: /usr/src
+  exportDir: /opt/man-pages
+
+
+provision:
+  - url:
+      from: https://www.kernel.org/pub/linux/docs/man-pages/man-pages-{% version %}.tar.xz
+      todir: "{% srcDir %}"
+
+build:
+  - shell:
+      cmds:
+        - make prefix={% exportDir %}/usr install
+      directory: "{% srcDir %}/man-pages-{% version %}"
+  - export: "{% exportDir %}"
+

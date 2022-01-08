@@ -1,0 +1,19 @@
+schema-version: 1.0
+
+description: |
+  The Man-pages package contains over 2,200 man pages.
+  Installed files: various man pages
+  Short Descriptions
+    man pages: Describe C programming language functions, important device files, and significant configuration files
+
+
+builder: ./man-pages-builder
+
+var:
+  version: 5.13
+
+
+provision:
+  - copy:
+      builder: man-pages
+      todir: /
