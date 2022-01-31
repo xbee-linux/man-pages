@@ -5,7 +5,9 @@ type: builder
 
 const:
   srcDir: /usr/src
-  exportDir: /opt/man-pages
+
+out:
+  man-pages: /opt/man-pages
 
 
 provision:
@@ -16,7 +18,7 @@ provision:
 build:
   - shell:
       cmds:
-        - make prefix={% exportDir %}/usr install
+        - make prefix=/usr install DESTDIR={% man-pages %}
       directory: "{% srcDir %}/man-pages-{% version %}"
-  - export: "{% exportDir %}"
+
 

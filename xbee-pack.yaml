@@ -9,7 +9,7 @@ description: |
 
 builder: ./man-pages-builder
 
-var:
+in:
   version: 5.13
 
 
