@@ -1,19 +1,24 @@
 schema-version: 1.0
 
+type: builder
+
 description: |
   The Man-pages package contains over 2,200 man pages.
   Installed files: various man pages
   Short Descriptions
     man pages: Describe C programming language functions, important device files, and significant configuration files
 
-
-builder: ./man-pages-builder
-
 in:
   version: 5.13
 
-
 provision:
-  - copy:
-      builder: man-pages
-      todir: /
+  - url:
+      from: https://www.kernel.org/pub/linux/docs/man-pages/man-pages-{% version %}.tar.xz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - make prefix=/usr install DESTDIR={% xbeeOut %}
+      directory: "{% xbeeSrc %}/man-pages-{% version %}"
+
